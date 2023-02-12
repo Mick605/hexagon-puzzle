@@ -1,0 +1,151 @@
+:host {
+    display: grid;
+    flex-direction: row;
+    position: relative;
+    grid-template-columns: 100vh 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 
+        "title reserve"
+        "slots reserve"
+    ;
+    font-size: 4vh;
+}
+
+#title {
+    grid-area: title;
+    font-size: 1.3rem;
+}
+
+#slots {
+    grid-area: slots;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#reserve {
+    grid-area: reserve;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    overflow: overlay;
+    align-self: center;
+    justify-content: center;
+    gap: 32px;
+    padding: 4%;
+}
+
+.hexagon {
+    aspect-ratio: 100 / 115;
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+/* main */
+
+#slots main {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-areas: 
+        ". . a a b b c c . ."
+        ". d d e e f f g g ."
+        "h h i i j j k k l l"
+        ". m m n n o o p p ."
+        ". . q q r r s s . ."
+    ;
+    padding-block: 3%;
+    width: 80%;
+    align-items: center;
+}
+
+/* slots */
+
+.slot {
+    box-sizing: border-box;
+    border: 1px solid #565656;
+    position: relative;
+    background-color: white;
+    grid-area: var(--position);
+    margin-block: -15%;
+}
+
+.slot::before,
+.slot::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border: 2px solid #565656;
+    pointer-events: none;
+}
+
+.slot::before {
+    transform: rotate(60deg);
+}
+.slot::after {
+    transform: rotate(120deg);
+}
+
+/* counters */
+.counter {
+    grid-area: var(--position);
+    z-index: 10;
+    position: relative;
+    text-align: center;
+    color: #b30000;
+}
+
+.counter.ok {
+    color: #4caf50;
+}
+
+.counter::before {
+    content: '➜';
+    margin-right: 10%;
+}
+
+.counter::after {
+    display: inline-block;
+    content: attr(data-result);
+}
+
+.counter.orient0 {
+    transform: rotate(0deg) translate(80%);
+}
+.counter.orient0::after {
+    transform: rotate(0deg);
+}
+
+.counter.orient60 {
+    transform: rotate(-120deg) translate(80%);
+}
+.counter.orient60::after {
+    transform: rotate(120deg);
+}
+
+.counter.orient120 {
+    transform: rotate(120deg) translate(80%);
+}
+.counter.orient120::after {
+    transform: rotate(-120deg);
+}
+
+
+/* tokens */
+.token {
+    background-color: #e9b567;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+#reserve .token {
+    width: 13vh;
+}
+
+.token::before {
+    content: attr(data-value);
+}
