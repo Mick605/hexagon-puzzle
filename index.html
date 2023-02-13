@@ -13,6 +13,16 @@
 
     <link rel="stylesheet" href="index.css">
     <script defer type="module" src="index.js"></script>
+
+    <!-- Mobile Drag&Drop -->
+    <link rel="stylesheet" href="lib/mobile-drag-drop/default.css">
+    <script src="lib/mobile-drag-drop/index.min.js"></script>
+    <script src="lib/mobile-drag-drop/scroll-behaviour.min.js"></script><!--optional import of scroll behaviour-->
+    <script>
+        MobileDragDrop.polyfill({
+            dragImageTranslateOverride: MobileDragDrop.scrollBehaviourDragImageTranslateOverride
+        });
+    </script>
 </head>
 
 <body>

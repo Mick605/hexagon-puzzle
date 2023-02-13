@@ -1,39 +1,43 @@
 :host {
     display: grid;
-    flex-direction: row;
     position: relative;
-    grid-template-columns: 100vh 1fr;
+    grid-template-columns: 100vmin 1fr;
     grid-template-rows: auto 1fr;
-    grid-template-areas: 
+    grid-template-areas:
         "title reserve"
         "slots reserve"
     ;
-    font-size: 4vh;
+    font-size: 4vmin;
 }
 
 #title {
     grid-area: title;
     font-size: 1.3rem;
+    padding: 0 16px;
 }
 
 #slots {
     grid-area: slots;
-    border: 1px solid blue;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 12%;
+    overflow: hidden;
 }
 
 #reserve {
     grid-area: reserve;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-auto-rows: auto;
+    grid-template-columns: repeat(auto-fill, 13vmin);
+    grid-area: reserve;
     overflow: overlay;
-    align-self: center;
+    overflow: auto;
     justify-content: center;
-    gap: 32px;
+    gap: 4vmin;
     padding: 4%;
+    align-content: flex-start;
+    border-left: 1px solid grey;
 }
 
 .hexagon {
@@ -47,7 +51,7 @@
     display: grid;
     grid-template-rows: repeat(5, 1fr);
     grid-template-columns: repeat(10, 1fr);
-    grid-template-areas: 
+    grid-template-areas:
         ". . a a b b c c . ."
         ". d d e e f f g g ."
         "h h i i j j k k l l"
@@ -55,8 +59,8 @@
         ". . q q r r s s . ."
     ;
     padding-block: 3%;
-    width: 80%;
     align-items: center;
+    width: 100%;
 }
 
 /* slots */
@@ -82,6 +86,7 @@
 .slot::before {
     transform: rotate(60deg);
 }
+
 .slot::after {
     transform: rotate(120deg);
 }
@@ -91,8 +96,8 @@
     grid-area: var(--position);
     z-index: 10;
     position: relative;
-    text-align: center;
     color: #b30000;
+    white-space: nowrap;
 }
 
 .counter.ok {
@@ -101,7 +106,7 @@
 
 .counter::before {
     content: '➜';
-    margin-right: 10%;
+    margin-right: 25%;
 }
 
 .counter::after {
@@ -110,24 +115,27 @@
 }
 
 .counter.orient0 {
-    transform: rotate(0deg) translate(80%);
+    transform: rotate(0deg) translate(100%);
 }
+
 .counter.orient0::after {
-    transform: rotate(0deg);
+    transform: translateX(-50%) rotate(0deg);
 }
 
 .counter.orient60 {
-    transform: rotate(-120deg) translate(80%);
+    transform: rotate(-120deg) translate(100%);
 }
+
 .counter.orient60::after {
-    transform: rotate(120deg);
+    transform: translateX(-50%) rotate(120deg);
 }
 
 .counter.orient120 {
-    transform: rotate(120deg) translate(80%);
+    transform: rotate(120deg) translate(100%);
 }
+
 .counter.orient120::after {
-    transform: rotate(-120deg);
+    transform: translateX(-50%) rotate(-120deg);
 }
 
 
@@ -142,10 +150,25 @@
     font-weight: bold;
 }
 
-#reserve .token {
-    width: 13vh;
-}
-
 .token::before {
     content: attr(data-value);
+}
+
+
+@media screen and (orientation: portrait) {
+    :host {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto 1fr;
+        grid-template-areas:
+            "title"
+            "slots"
+            "reserve"
+        ;
+    }
+
+    #reserve {
+        border-left: none;
+        border-top: 1px solid grey;
+        align-content: stretch;
+    }
 }
