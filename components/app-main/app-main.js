@@ -25,6 +25,9 @@ export default class AppMain extends BaseComponent {
             this.placement = new Array(19).fill(null);
             this.refreshDom();
         }
+
+        history.replaceState(JSON.stringify(this.placement), "");
+        window.addEventListener('popstate', (e) => { this.onHistoryChange(e.state) });
     }
 
     dragstartHandler(ev) {
@@ -70,6 +73,7 @@ export default class AppMain extends BaseComponent {
 
         this.refreshDom();
         localStorage.setItem("placement", JSON.stringify(this.placement));
+        history.pushState(JSON.stringify(this.placement), "");
     }
 
     calculateSum(arr) {
@@ -88,6 +92,7 @@ export default class AppMain extends BaseComponent {
             const delta = 38 - this.calculateSum(positions.map(slotName => this.placement.indexOf(slotName) + 1));
             counterDom.dataset.result = this.toSignedString(delta);
             counterDom.classList.toggle('ok', delta === 0);
+            counterDom.classList.toggle('greater', delta > 0);
         }
     }
 
@@ -101,6 +106,12 @@ export default class AppMain extends BaseComponent {
 
             container.appendChild(tokenDom);
         }
+    }
+
+    onHistoryChange(state) {
+        this.placement = JSON.parse(state);
+        this.refreshDom();
+        localStorage.setItem("placement", JSON.stringify(this.placement));
     }
 }
 

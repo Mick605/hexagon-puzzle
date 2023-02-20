@@ -96,12 +96,16 @@
     grid-area: var(--position);
     z-index: 10;
     position: relative;
-    color: #b30000;
+    color: #3f51b5;
     white-space: nowrap;
 }
 
 .counter.ok {
     color: #4caf50;
+}
+
+.counter.greater {
+    color: #b30000;
 }
 
 .counter::before {
