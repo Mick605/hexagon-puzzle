@@ -8,6 +8,6 @@ To play the game, simply drag and drop the hexagonal tokens onto the game board.
 This implementation of the hexagon puzzle is built using web components and follows the shadow DOM pattern to encapsulate the implementation details of each component. The implementation uses local storage to save the state of the game and the browser's history API to allow the user to undo and redo moves.
 
 ## How to Run
-To run the project, simply open the index.html file in a web browser.
+To run the project, simply serve this folder and open it in a web browser.
 
 A demo version is hosted on Github Pages: https://mick605.github.io/hexagon-puzzle/
